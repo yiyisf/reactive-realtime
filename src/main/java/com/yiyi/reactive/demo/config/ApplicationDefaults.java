@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * <p>JHipsterDefaults interface.</p>
+ * <p>ApplicationDefaults interface.</p>
  */
-public interface JHipsterDefaults {
+public interface ApplicationDefaults {
 
     interface Async {
 

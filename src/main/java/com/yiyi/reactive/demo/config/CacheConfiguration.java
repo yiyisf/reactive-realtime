@@ -7,8 +7,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.boot.info.BuildProperties;
-import org.springframework.boot.info.GitProperties;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.cloud.client.ServiceInstance;
@@ -17,7 +15,6 @@ import org.springframework.cloud.client.serviceregistry.Registration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
-import org.springframework.core.env.Profiles;
 
 import javax.annotation.PreDestroy;
 
@@ -59,7 +56,7 @@ public class CacheConfiguration {
     }
 
     @Bean
-    public HazelcastInstance hazelcastInstance(JHipsterProperties jHipsterProperties) {
+    public HazelcastInstance hazelcastInstance(ApplicationProperties applicationProperties) {
         log.debug("Configuring Hazelcast");
         HazelcastInstance hazelCastInstance = Hazelcast.getHazelcastInstanceByName("yiyi");
         if (hazelCastInstance != null) {
@@ -99,23 +96,23 @@ public class CacheConfiguration {
 //                }
 //            }
         }
-        config.getMapConfigs().put("default", initializeDefaultMapConfig(jHipsterProperties));
+        config.getMapConfigs().put("default", initializeDefaultMapConfig(applicationProperties));
 
         // Full reference is available at: https://docs.hazelcast.org/docs/management-center/3.9/manual/html/Deploying_and_Starting.html
-        config.setManagementCenterConfig(initializeDefaultManagementCenterConfig(jHipsterProperties));
-        config.getMapConfigs().put("com.yiyi.reactive.demo.model.*", initializeDomainMapConfig(jHipsterProperties));
+        config.setManagementCenterConfig(initializeDefaultManagementCenterConfig(applicationProperties));
+        config.getMapConfigs().put("com.yiyi.reactive.demo.model.*", initializeDomainMapConfig(applicationProperties));
         return Hazelcast.newHazelcastInstance(config);
     }
 
-    private ManagementCenterConfig initializeDefaultManagementCenterConfig(JHipsterProperties jHipsterProperties) {
+    private ManagementCenterConfig initializeDefaultManagementCenterConfig(ApplicationProperties applicationProperties) {
         ManagementCenterConfig managementCenterConfig = new ManagementCenterConfig();
-        managementCenterConfig.setEnabled(jHipsterProperties.getCache().getHazelcast().getManagementCenter().isEnabled());
-        managementCenterConfig.setUrl(jHipsterProperties.getCache().getHazelcast().getManagementCenter().getUrl());
-        managementCenterConfig.setUpdateInterval(jHipsterProperties.getCache().getHazelcast().getManagementCenter().getUpdateInterval());
+        managementCenterConfig.setEnabled(applicationProperties.getCache().getHazelcast().getManagementCenter().isEnabled());
+        managementCenterConfig.setUrl(applicationProperties.getCache().getHazelcast().getManagementCenter().getUrl());
+        managementCenterConfig.setUpdateInterval(applicationProperties.getCache().getHazelcast().getManagementCenter().getUpdateInterval());
         return managementCenterConfig;
     }
 
-    private MapConfig initializeDefaultMapConfig(JHipsterProperties jHipsterProperties) {
+    private MapConfig initializeDefaultMapConfig(ApplicationProperties applicationProperties) {
         MapConfig mapConfig = new MapConfig();
 
         /*
@@ -123,7 +120,7 @@ public class CacheConfiguration {
         then all entries of the map will be copied to another JVM for
         fail-safety. Valid numbers are 0 (no backup), 1, 2, 3.
         */
-        mapConfig.setBackupCount(jHipsterProperties.getCache().getHazelcast().getBackupCount());
+        mapConfig.setBackupCount(applicationProperties.getCache().getHazelcast().getBackupCount());
 
         /*
         Valid values are:
@@ -145,9 +142,9 @@ public class CacheConfiguration {
         return mapConfig;
     }
 
-    private MapConfig initializeDomainMapConfig(JHipsterProperties jHipsterProperties) {
+    private MapConfig initializeDomainMapConfig(ApplicationProperties applicationProperties) {
         MapConfig mapConfig = new MapConfig();
-        mapConfig.setTimeToLiveSeconds(jHipsterProperties.getCache().getHazelcast().getTimeToLiveSeconds());
+        mapConfig.setTimeToLiveSeconds(applicationProperties.getCache().getHazelcast().getTimeToLiveSeconds());
         return mapConfig;
     }
 

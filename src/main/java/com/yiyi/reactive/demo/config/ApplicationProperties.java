@@ -31,18 +31,17 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Properties specific to JHipster.
+ * Properties specific to Application.
  *
  * <p> Properties are configured in the application.yml file. </p>
  * <p> This class also load properties in the Spring Environment from the git.properties and META-INF/build-info.properties
  * files if they are found in the classpath.</p>
  */
-@ConfigurationProperties(prefix = "jhipster", ignoreUnknownFields = false)
+@ConfigurationProperties(prefix = "app", ignoreUnknownFields = false)
 @PropertySources({
-        @PropertySource(value = "classpath:git.properties", ignoreResourceNotFound = true),
         @PropertySource(value = "classpath:META-INF/build-info.properties", ignoreResourceNotFound = true)
 })
-public class JHipsterProperties {
+public class ApplicationProperties {
 
     private final Async async = new Async();
 
@@ -75,7 +74,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>async</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Async} object.
+     * @return a {@link ApplicationProperties.Async} object.
      */
     public Async getAsync() {
         return async;
@@ -84,7 +83,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>http</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Http} object.
+     * @return a {@link ApplicationProperties.Http} object.
      */
     public Http getHttp() {
         return http;
@@ -93,7 +92,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>cache</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Cache} object.
+     * @return a {@link ApplicationProperties.Cache} object.
      */
     public Cache getCache() {
         return cache;
@@ -102,7 +101,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>mail</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Mail} object.
+     * @return a {@link ApplicationProperties.Mail} object.
      */
     public Mail getMail() {
         return mail;
@@ -111,7 +110,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>registry</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Registry} object.
+     * @return a {@link ApplicationProperties.Registry} object.
      */
     public Registry getRegistry() {
         return registry;
@@ -120,7 +119,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>security</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Security} object.
+     * @return a {@link ApplicationProperties.Security} object.
      */
     public Security getSecurity() {
         return security;
@@ -129,7 +128,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>swagger</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Swagger} object.
+     * @return a {@link ApplicationProperties.Swagger} object.
      */
     public Swagger getSwagger() {
         return swagger;
@@ -138,7 +137,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>metrics</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Metrics} object.
+     * @return a {@link ApplicationProperties.Metrics} object.
      */
     public Metrics getMetrics() {
         return metrics;
@@ -147,7 +146,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>logging</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Logging} object.
+     * @return a {@link ApplicationProperties.Logging} object.
      */
     public Logging getLogging() {
         return logging;
@@ -165,7 +164,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>social</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Social} object.
+     * @return a {@link ApplicationProperties.Social} object.
      */
     public Social getSocial() {
         return social;
@@ -174,7 +173,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>gateway</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.Gateway} object.
+     * @return a {@link ApplicationProperties.Gateway} object.
      */
     public Gateway getGateway() {
         return gateway;
@@ -183,7 +182,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>clientApp</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.ClientApp} object.
+     * @return a {@link ApplicationProperties.ClientApp} object.
      */
     public ClientApp getClientApp() {
         return clientApp;
@@ -192,7 +191,7 @@ public class JHipsterProperties {
     /**
      * <p>Getter for the field <code>auditEvents</code>.</p>
      *
-     * @return a {@link com.yiyi.reactive.demo.config.JHipsterProperties.AuditEvents} object.
+     * @return a {@link ApplicationProperties.AuditEvents} object.
      */
     public AuditEvents getAuditEvents() {
         return auditEvents;
@@ -200,11 +199,11 @@ public class JHipsterProperties {
 
     public static class Async {
 
-        private int corePoolSize = JHipsterDefaults.Async.corePoolSize;
+        private int corePoolSize = ApplicationDefaults.Async.corePoolSize;
 
-        private int maxPoolSize = JHipsterDefaults.Async.maxPoolSize;
+        private int maxPoolSize = ApplicationDefaults.Async.maxPoolSize;
 
-        private int queueCapacity = JHipsterDefaults.Async.queueCapacity;
+        private int queueCapacity = ApplicationDefaults.Async.queueCapacity;
 
         public int getCorePoolSize() {
             return corePoolSize;
@@ -241,7 +240,7 @@ public class JHipsterProperties {
 
         public static class Cache {
 
-            private int timeToLiveInDays = JHipsterDefaults.Http.Cache.timeToLiveInDays;
+            private int timeToLiveInDays = ApplicationDefaults.Http.Cache.timeToLiveInDays;
 
             public int getTimeToLiveInDays() {
                 return timeToLiveInDays;
@@ -293,9 +292,9 @@ public class JHipsterProperties {
 
         public static class Hazelcast {
 
-            private int timeToLiveSeconds = JHipsterDefaults.Cache.Hazelcast.timeToLiveSeconds;
+            private int timeToLiveSeconds = ApplicationDefaults.Cache.Hazelcast.timeToLiveSeconds;
 
-            private int backupCount = JHipsterDefaults.Cache.Hazelcast.backupCount;
+            private int backupCount = ApplicationDefaults.Cache.Hazelcast.backupCount;
 
             private final ManagementCenter managementCenter = new ManagementCenter();
 
@@ -305,11 +304,11 @@ public class JHipsterProperties {
 
             public static class ManagementCenter {
 
-                private boolean enabled = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.enabled;
+                private boolean enabled = ApplicationDefaults.Cache.Hazelcast.ManagementCenter.enabled;
 
-                private int updateInterval = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.updateInterval;
+                private int updateInterval = ApplicationDefaults.Cache.Hazelcast.ManagementCenter.updateInterval;
 
-                private String url = JHipsterDefaults.Cache.Hazelcast.ManagementCenter.url;
+                private String url = ApplicationDefaults.Cache.Hazelcast.ManagementCenter.url;
 
                 public boolean isEnabled() {
                     return enabled;
@@ -356,9 +355,9 @@ public class JHipsterProperties {
 
         public static class Caffeine {
 
-            private int timeToLiveSeconds = JHipsterDefaults.Cache.Caffeine.timeToLiveSeconds;
+            private int timeToLiveSeconds = ApplicationDefaults.Cache.Caffeine.timeToLiveSeconds;
 
-            private long maxEntries = JHipsterDefaults.Cache.Caffeine.maxEntries;
+            private long maxEntries = ApplicationDefaults.Cache.Caffeine.maxEntries;
 
             public int getTimeToLiveSeconds() {
                 return timeToLiveSeconds;
@@ -379,9 +378,9 @@ public class JHipsterProperties {
 
         public static class Ehcache {
 
-            private int timeToLiveSeconds = JHipsterDefaults.Cache.Ehcache.timeToLiveSeconds;
+            private int timeToLiveSeconds = ApplicationDefaults.Cache.Ehcache.timeToLiveSeconds;
 
-            private long maxEntries = JHipsterDefaults.Cache.Ehcache.maxEntries;
+            private long maxEntries = ApplicationDefaults.Cache.Ehcache.maxEntries;
 
             public int getTimeToLiveSeconds() {
                 return timeToLiveSeconds;
@@ -402,9 +401,9 @@ public class JHipsterProperties {
 
         public static class Infinispan {
 
-            private String configFile = JHipsterDefaults.Cache.Infinispan.configFile;
+            private String configFile = ApplicationDefaults.Cache.Infinispan.configFile;
 
-            private boolean statsEnabled = JHipsterDefaults.Cache.Infinispan.statsEnabled;
+            private boolean statsEnabled = ApplicationDefaults.Cache.Infinispan.statsEnabled;
 
             private final Local local = new Local();
 
@@ -442,9 +441,9 @@ public class JHipsterProperties {
 
             public static class Local {
 
-                private long timeToLiveSeconds = JHipsterDefaults.Cache.Infinispan.Local.timeToLiveSeconds;
+                private long timeToLiveSeconds = ApplicationDefaults.Cache.Infinispan.Local.timeToLiveSeconds;
 
-                private long maxEntries = JHipsterDefaults.Cache.Infinispan.Local.maxEntries;
+                private long maxEntries = ApplicationDefaults.Cache.Infinispan.Local.maxEntries;
 
                 public long getTimeToLiveSeconds() {
                     return timeToLiveSeconds;
@@ -466,11 +465,11 @@ public class JHipsterProperties {
 
             public static class Distributed {
 
-                private long timeToLiveSeconds = JHipsterDefaults.Cache.Infinispan.Distributed.timeToLiveSeconds;
+                private long timeToLiveSeconds = ApplicationDefaults.Cache.Infinispan.Distributed.timeToLiveSeconds;
 
-                private long maxEntries = JHipsterDefaults.Cache.Infinispan.Distributed.maxEntries;
+                private long maxEntries = ApplicationDefaults.Cache.Infinispan.Distributed.maxEntries;
 
-                private int instanceCount = JHipsterDefaults.Cache.Infinispan.Distributed.instanceCount;
+                private int instanceCount = ApplicationDefaults.Cache.Infinispan.Distributed.instanceCount;
 
                 public long getTimeToLiveSeconds() {
                     return timeToLiveSeconds;
@@ -499,9 +498,9 @@ public class JHipsterProperties {
 
             public static class Replicated {
 
-                private long timeToLiveSeconds = JHipsterDefaults.Cache.Infinispan.Replicated.timeToLiveSeconds;
+                private long timeToLiveSeconds = ApplicationDefaults.Cache.Infinispan.Replicated.timeToLiveSeconds;
 
-                private long maxEntries = JHipsterDefaults.Cache.Infinispan.Replicated.maxEntries;
+                private long maxEntries = ApplicationDefaults.Cache.Infinispan.Replicated.maxEntries;
 
                 public long getTimeToLiveSeconds() {
                     return timeToLiveSeconds;
@@ -524,16 +523,16 @@ public class JHipsterProperties {
 
         public static class Memcached {
 
-            private boolean enabled = JHipsterDefaults.Cache.Memcached.enabled;
+            private boolean enabled = ApplicationDefaults.Cache.Memcached.enabled;
 
             /**
              * Comma or whitespace separated list of servers' addresses.
              */
-            private String servers = JHipsterDefaults.Cache.Memcached.servers;
+            private String servers = ApplicationDefaults.Cache.Memcached.servers;
 
-            private int expiration = JHipsterDefaults.Cache.Memcached.expiration;
+            private int expiration = ApplicationDefaults.Cache.Memcached.expiration;
 
-            private boolean useBinaryProtocol = JHipsterDefaults.Cache.Memcached.useBinaryProtocol;
+            private boolean useBinaryProtocol = ApplicationDefaults.Cache.Memcached.useBinaryProtocol;
 
             public boolean isEnabled() {
                 return enabled;
@@ -569,9 +568,9 @@ public class JHipsterProperties {
         }
 
         public static class Redis {
-            private String[] server = JHipsterDefaults.Cache.Redis.server;
-            private int expiration = JHipsterDefaults.Cache.Redis.expiration;
-            private boolean cluster = JHipsterDefaults.Cache.Redis.cluster;
+            private String[] server = ApplicationDefaults.Cache.Redis.server;
+            private int expiration = ApplicationDefaults.Cache.Redis.expiration;
+            private boolean cluster = ApplicationDefaults.Cache.Redis.cluster;
 
             public String[] getServer() {
                 return server;
@@ -601,11 +600,11 @@ public class JHipsterProperties {
 
     public static class Mail {
 
-        private boolean enabled = JHipsterDefaults.Mail.enabled;
+        private boolean enabled = ApplicationDefaults.Mail.enabled;
 
-        private String from = JHipsterDefaults.Mail.from;
+        private String from = ApplicationDefaults.Mail.from;
 
-        private String baseUrl = JHipsterDefaults.Mail.baseUrl;
+        private String baseUrl = ApplicationDefaults.Mail.baseUrl;
 
         public boolean isEnabled() {
             return enabled;
@@ -660,13 +659,13 @@ public class JHipsterProperties {
 
         public static class ClientAuthorization {
 
-            private String accessTokenUri = JHipsterDefaults.Security.ClientAuthorization.accessTokenUri;
+            private String accessTokenUri = ApplicationDefaults.Security.ClientAuthorization.accessTokenUri;
 
-            private String tokenServiceId = JHipsterDefaults.Security.ClientAuthorization.tokenServiceId;
+            private String tokenServiceId = ApplicationDefaults.Security.ClientAuthorization.tokenServiceId;
 
-            private String clientId = JHipsterDefaults.Security.ClientAuthorization.clientId;
+            private String clientId = ApplicationDefaults.Security.ClientAuthorization.clientId;
 
-            private String clientSecret = JHipsterDefaults.Security.ClientAuthorization.clientSecret;
+            private String clientSecret = ApplicationDefaults.Security.ClientAuthorization.clientSecret;
 
             public String getAccessTokenUri() {
                 return accessTokenUri;
@@ -711,14 +710,14 @@ public class JHipsterProperties {
 
             public static class Jwt {
 
-                private String secret = JHipsterDefaults.Security.Authentication.Jwt.secret;
+                private String secret = ApplicationDefaults.Security.Authentication.Jwt.secret;
 
-                private String base64Secret = JHipsterDefaults.Security.Authentication.Jwt.base64Secret;
+                private String base64Secret = ApplicationDefaults.Security.Authentication.Jwt.base64Secret;
 
-                private long tokenValidityInSeconds = JHipsterDefaults.Security.Authentication.Jwt
+                private long tokenValidityInSeconds = ApplicationDefaults.Security.Authentication.Jwt
                         .tokenValidityInSeconds;
 
-                private long tokenValidityInSecondsForRememberMe = JHipsterDefaults.Security.Authentication.Jwt
+                private long tokenValidityInSecondsForRememberMe = ApplicationDefaults.Security.Authentication.Jwt
                         .tokenValidityInSecondsForRememberMe;
 
                 public String getSecret() {
@@ -758,7 +757,7 @@ public class JHipsterProperties {
         public static class RememberMe {
 
             @NotNull
-            private String key = JHipsterDefaults.Security.RememberMe.key;
+            private String key = ApplicationDefaults.Security.RememberMe.key;
 
             public String getKey() {
                 return key;
@@ -784,31 +783,31 @@ public class JHipsterProperties {
 
     public static class Swagger {
 
-        private String title = JHipsterDefaults.Swagger.title;
+        private String title = ApplicationDefaults.Swagger.title;
 
-        private String description = JHipsterDefaults.Swagger.description;
+        private String description = ApplicationDefaults.Swagger.description;
 
-        private String version = JHipsterDefaults.Swagger.version;
+        private String version = ApplicationDefaults.Swagger.version;
 
-        private String termsOfServiceUrl = JHipsterDefaults.Swagger.termsOfServiceUrl;
+        private String termsOfServiceUrl = ApplicationDefaults.Swagger.termsOfServiceUrl;
 
-        private String contactName = JHipsterDefaults.Swagger.contactName;
+        private String contactName = ApplicationDefaults.Swagger.contactName;
 
-        private String contactUrl = JHipsterDefaults.Swagger.contactUrl;
+        private String contactUrl = ApplicationDefaults.Swagger.contactUrl;
 
-        private String contactEmail = JHipsterDefaults.Swagger.contactEmail;
+        private String contactEmail = ApplicationDefaults.Swagger.contactEmail;
 
-        private String license = JHipsterDefaults.Swagger.license;
+        private String license = ApplicationDefaults.Swagger.license;
 
-        private String licenseUrl = JHipsterDefaults.Swagger.licenseUrl;
+        private String licenseUrl = ApplicationDefaults.Swagger.licenseUrl;
 
-        private String defaultIncludePattern = JHipsterDefaults.Swagger.defaultIncludePattern;
+        private String defaultIncludePattern = ApplicationDefaults.Swagger.defaultIncludePattern;
 
-        private String host = JHipsterDefaults.Swagger.host;
+        private String host = ApplicationDefaults.Swagger.host;
 
-        private String[] protocols = JHipsterDefaults.Swagger.protocols;
+        private String[] protocols = ApplicationDefaults.Swagger.protocols;
 
-        private boolean useDefaultResponseMessages = JHipsterDefaults.Swagger.useDefaultResponseMessages;
+        private boolean useDefaultResponseMessages = ApplicationDefaults.Swagger.useDefaultResponseMessages;
 
         public String getTitle() {
             return title;
@@ -925,9 +924,9 @@ public class JHipsterProperties {
 
         public static class Logs {
 
-            private boolean enabled = JHipsterDefaults.Metrics.Logs.enabled;
+            private boolean enabled = ApplicationDefaults.Metrics.Logs.enabled;
 
-            private long reportFrequency = JHipsterDefaults.Metrics.Logs.reportFrequency;
+            private long reportFrequency = ApplicationDefaults.Metrics.Logs.reportFrequency;
 
             public boolean isEnabled() {
                 return enabled;
@@ -949,7 +948,7 @@ public class JHipsterProperties {
 
     public static class Logging {
 
-        private boolean useJsonFormat = JHipsterDefaults.Logging.useJsonFormat;
+        private boolean useJsonFormat = ApplicationDefaults.Logging.useJsonFormat;
 
         private final Logstash logstash = new Logstash();
 
@@ -967,13 +966,13 @@ public class JHipsterProperties {
 
         public static class Logstash {
 
-            private boolean enabled = JHipsterDefaults.Logging.Logstash.enabled;
+            private boolean enabled = ApplicationDefaults.Logging.Logstash.enabled;
 
-            private String host = JHipsterDefaults.Logging.Logstash.host;
+            private String host = ApplicationDefaults.Logging.Logstash.host;
 
-            private int port = JHipsterDefaults.Logging.Logstash.port;
+            private int port = ApplicationDefaults.Logging.Logstash.port;
 
-            private int queueSize = JHipsterDefaults.Logging.Logstash.queueSize;
+            private int queueSize = ApplicationDefaults.Logging.Logstash.queueSize;
 
             public boolean isEnabled() {
                 return enabled;
@@ -1011,7 +1010,7 @@ public class JHipsterProperties {
 
     public static class Social {
 
-        private String redirectAfterSignIn = JHipsterDefaults.Social.redirectAfterSignIn;
+        private String redirectAfterSignIn = ApplicationDefaults.Social.redirectAfterSignIn;
 
         public String getRedirectAfterSignIn() {
             return redirectAfterSignIn;
@@ -1030,7 +1029,7 @@ public class JHipsterProperties {
             return rateLimiting;
         }
 
-        private Map<String, List<String>> authorizedMicroservicesEndpoints = JHipsterDefaults.Gateway
+        private Map<String, List<String>> authorizedMicroservicesEndpoints = ApplicationDefaults.Gateway
                 .authorizedMicroservicesEndpoints;
 
         public Map<String, List<String>> getAuthorizedMicroservicesEndpoints() {
@@ -1043,11 +1042,11 @@ public class JHipsterProperties {
 
         public static class RateLimiting {
 
-            private boolean enabled = JHipsterDefaults.Gateway.RateLimiting.enabled;
+            private boolean enabled = ApplicationDefaults.Gateway.RateLimiting.enabled;
 
-            private long limit = JHipsterDefaults.Gateway.RateLimiting.limit;
+            private long limit = ApplicationDefaults.Gateway.RateLimiting.limit;
 
-            private int durationInSeconds = JHipsterDefaults.Gateway.RateLimiting.durationInSeconds;
+            private int durationInSeconds = ApplicationDefaults.Gateway.RateLimiting.durationInSeconds;
 
             public boolean isEnabled() {
                 return enabled;
@@ -1077,7 +1076,7 @@ public class JHipsterProperties {
 
     public static class Registry {
 
-        private String password = JHipsterDefaults.Registry.password;
+        private String password = ApplicationDefaults.Registry.password;
 
         public String getPassword() {
             return password;
@@ -1090,7 +1089,7 @@ public class JHipsterProperties {
 
     public static class ClientApp {
 
-        private String name = JHipsterDefaults.ClientApp.name;
+        private String name = ApplicationDefaults.ClientApp.name;
 
         public String getName() {
             return name;
@@ -1102,7 +1101,7 @@ public class JHipsterProperties {
     }
 
     public static class AuditEvents {
-        private int retentionPeriod = JHipsterDefaults.AuditEvents.retentionPeriod;
+        private int retentionPeriod = ApplicationDefaults.AuditEvents.retentionPeriod;
 
         public int getRetentionPeriod() {
             return retentionPeriod;
